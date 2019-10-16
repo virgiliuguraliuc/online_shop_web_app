@@ -35,9 +35,35 @@ window.shop = {
                         </div>                       
                     </div>
                 </div>`
-    }
+    },
 
+    addProductToCart: function (productId) {
+        //customerId to be read from memory somehow in the future
+        var CustomerId = 34;
+        var requestBody = {
+            customerId: CustomerId,
+            productId: productId
+        };
 
-};
+        $.ajax({
+            url: shop.API_BASE_URL + "/carts",
+            method: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(requestBody)
+        }).done(function () {
+            window.location.replace("cart.html")
+        }) //asa fac navigatie spre alta pagina
+    },
+
+        bindEvents: function () {
+            $(`.single-product-area .row`).delegate(`.add_to_cart_button`, `click`, function (event) {
+                event.preventDefault();
+
+                var productId = $(this).data(`product_id`);
+                shop.addProductToCart(productId);
+            });
+        }
+    };
 
 shop.getProducts();
+shop.bindEvents();
