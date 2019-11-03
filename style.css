@@ -21,11 +21,16 @@ img {
 h1,
 h2,
 h3,
-h4,
 h5,
 h6 {
-    margin: 0 0 15px;
+    margin: 0 0 10px;
 }
+
+h4 {
+    margin-bottom: 10px;
+ font-size: 100%;
+}
+
 body { font-family:Arial, Helvetica, sans-serif; }
 
 
@@ -142,12 +147,12 @@ z-index: 999;}
 
 
 .mainmenu-area ul.navbar-nav li a {
-    color: #6e6a6a;
+    color: #e0e0e0;
     font-size: 14px;
     padding: 20px;
 }
 
-.mainmenu-area ul.navbar-nav li:hover a, .mainmenu-area ul.navbar-nav li.active a {background: #5a88ca; color:#FFF;}
+.mainmenu-area ul.navbar-nav li:hover a, .mainmenu-area ul.navbar-nav li.active a {background: #cccccc; color:#FFF;}
 .mainmenu-area .nav > li > a:focus {color: #FFF;}
 
 .slider-area { width:80%; position:relative; margin:0 auto; padding:5px;}

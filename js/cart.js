@@ -3,7 +3,7 @@ window.Cart = {
 
     getProducts:function () {
         $.ajax({
-            url: Cart.API_BASE_URL + "/carts/" + 34,
+            url: Cart.API_BASE_URL + "/carts/" + 1,
             method: "GET"
 
         }).done(function (response) {
