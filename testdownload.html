@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Spring Boot File Upload / Download Rest API Example</title>
+    <link rel="stylesheet" href="css/downloand.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+</head>
+<body onload="updateSize();" >
+<noscript>
+    <h2>Sorry! Your browser doesn't support Javascript</h2>
+</noscript>
+<div class="upload-container">
+    <div class="upload-header">
+        <h2>Spring Boot File Upload / Download Rest API Example</h2>
+    </div>
+    <div class="upload-content">
+        <div class="single-upload">
+            <h3>Upload Single File</h3>
+            <form id="singleUploadForm" name="singleUploadForm">
+                <input id="singleFileUploadInput" type="file" name="file" class="file-input" required />
+                <button type="submit" class="primary submit-btn">Submit</button>
+            </form>
+            <div class="upload-response">
+                <div id="singleFileUploadError"></div>
+                <div id="singleFileUploadSuccess"></div>
+            </div>
+        </div>
+        <div class="multiple-upload">
+            <h3>Upload Multiple Files</h3>
+            <form id="multipleUploadForm" name="multipleUploadForm">
+                <input id="multipleFileUploadInput" type="file" name="files" class="file-input" multiple required />
+                <button type="submit" class="primary submit-btn">Submit</button>
+            </form>
+
+            <div class="upload-response">
+                <div id="multipleFileUploadError"></div>
+                <div id="multipleFileUploadSuccess"></div>
+            </div>
+
+            <h1>Spring Boot - File Upload</h1>
+
+            <form method="POST" action="/uploadFile" enctype="multipart/form-data">
+                <input type="file" name="file" /><br />
+                <br /> <input type="submit" value="Submit" />
+            </form>
+
+        </div>
+    </div>
+<div>
+    <form name="uploadingForm" enctype="multipart/form-data" action="/uploadFile" method="POST">
+        <p>
+            <input id="fileInput" type="file" name="uploadingFiles" onchange="updateSize();" multiple>
+            selected files: <span id="fileNum">0</span>;
+            total size: <span id="fileSize">0</span>
+        </p>
+        <p>
+            <input type="submit" value="Upload files">
+        </p>
+    </form>
+    <div>
+        <div>Uploaded files:</div>
+        <#list files as file>
+        <div>
+            ${file.getName()}
+        </div>
+    </#list>
+</div>
+
+</div>
+<script src="js/download-load.js" ></script>
+<!-- Latest jQuery form server -->
+<script src="https://code.jquery.com/jquery.min.js"></script>
+
+
+<!-- Bootstrap JS form CDN -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<!-- jQuery sticky menu -->
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.sticky.js"></script>
+
+<!-- jQuery easing -->
+<script src="js/jquery.easing.1.3.min.js"></script>
+<script src="js/jquery-3.4.1.min.js"></script>
+
+<!-- Main Script -->
+<script src="js/main.js"></script>
+
+<!-- Slider -->
+<script type="text/javascript" src="js/bxslider.min.js"></script>
+<script type="text/javascript" src="js/script.slider.js"></script>
+</body>
+</html>

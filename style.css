@@ -1016,6 +1016,7 @@ div.cart-collaterals ul.products li.product .price ins {
     font-size: 18px;
     margin-bottom: 20px;
     padding: 15px;
+    margin-left: 30em;
 }
 .col2-set {
     margin-left: -30px;
@@ -1029,10 +1030,14 @@ div.cart-collaterals ul.products li.product .price ins {
 #customer_details label {
     display: block;
     margin: 0 0 5px;
+    margin-left: 40em;
+    width: 200%;
 }
 #customer_details input[type="text"], #customer_details textarea, .shipping_calculator input[type=text] {
     margin-bottom: 10px;
-    width: 100%;
+    width: 200%;
+    margin-left: 40em;
+
 }
 #customer_details h3 {
     color: #5a88ca;
