@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Spring Boot FileUpload / Download Rest API Example</title>
+    <link rel="stylesheet" href="css/downloand.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+</head>
+<body>
+<!--<noscript>-->
+<!--    <h2>Sorry! Your browser doesn't support Javascript</h2>-->
+<!--</noscript>-->
+<!--<div class="upload-container">-->
+<!--    <div class="upload-header">-->
+<!--        <h2>Spring Boot File Upload / Download Rest API Example</h2>-->
+<!--    </div>-->
+<!--    <div class="upload-content">-->
+<!--        <div class="single-upload">-->
+<!--            <h3>Upload Single File</h3>-->
+<!--            <form id="singleUploadForm" name="singleUploadForm" enctype="multipart/form-data" action="/fileUpload" method="POST">-->
+<!--                <input id="singleFileUploadInput" type="file" name="file" class="file-input" required />-->
+<!--                <button type="submit" class="primary submit-btn">Submit</button>-->
+<!--            </form>-->
+<!--            <div class="upload-response">-->
+<!--                <div id="singleFileUploadError"></div>-->
+<!--                <div id="singleFileUploadSuccess"></div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="multiple-upload">-->
+<!--            <h3>Upload Multiple Files</h3>-->
+<!--            <form id="multipleUploadForm" name="multipleUploadForm">-->
+<!--                <input id="multipleFileUploadInput" type="file" name="files" class="file-input" multiple required />-->
+<!--                <button type="submit" class="primary submit-btn">Submit</button>-->
+<!--            </form>-->
+
+<!--            <div class="upload-response">-->
+<!--                <div id="multipleFileUploadError"></div>-->
+<!--                <div id="multipleFileUploadSuccess"></div>-->
+<!--            </div>-->
+
+<!--            <h1>Spring Boot - File Upload</h1>-->
+
+<!--            <form method="POST" action="/" enctype="multipart/form-data">-->
+<!--                <input type="file" name="file" /><br />-->
+<!--                <br /> <input type="submit" value="Submit" />-->
+<!--            </form>-->
+
+<!--        </div>-->
+<!--    </div>-->
+<!--<div>-->
+<!--    <form name="singleUploadForm" enctype="multipart/form-data" action="/" method="POST">-->
+<!--        <p>-->
+<!--            <input id="fileInput" type="file" name="uploadingFiles" multiple>-->
+<!--            selected files: <span id="fileNum">0</span>;-->
+<!--            total size: <span id="fileSize">0</span>-->
+<!--        </p>-->
+<!--        <p>-->
+<!--            <input type="submit" value="Upload files">-->
+<!--        </p>-->
+<!--    </form>-->
+
+<!--    <form method="POST" enctype="multipart/form-data" id="fileUploadForm">-->
+<!--        Description: <br/>-->
+<!--        <input type="text" name="description" style="width:350px;"/>-->
+<!--        <br/><br/>-->
+<!--        File to upload (1): <input type="file" name="files"/><br />-->
+<!--        File to upload (2): <input type="file" name="files"/><br />-->
+<!--        File to upload (3): <input type="file" name="files"/><br />-->
+<!--        File to upload (4): <input type="file" name="files"/><br />-->
+<!--        File to upload (5): <input type="file" name="files"/><br />-->
+<!--        <input type="submit" value="Submit" id="submitButton"/>-->
+<!--    </form>-->
+<!--    <h2>Upload Results:</h2>-->
+<!--    <div style="border:1px solid #ccc;padding: 5px;">-->
+<!--        <span id="result"></span>-->
+<!--    </div>-->
+
+
+<!--</div>-->
+<!--</div>-->
+<div class="upload-container">
+<span id="uploadFrameHolder" style="display:none"><iframe name="uploadFrame" ></iframe></span>
+
+<form id="frm" method="post" enctype="multipart/form-data" target="uploadFrame" onsubmit="formSubmit()">
+    <input type="file" id="file" name="dummyname" onchange="prepareUpload()" />
+    <input type="submit" value="Upload" />
+</form>
+<table>
+    <tr><td>File Name: </td><td id="fileName"></td></tr>
+    <tr><td>Upload Target: </td><td id="target"></td></tr>
+    <tr><td>File Size: </td><td id="fileSize"></td></tr>
+    <tr><td>Bytes Uploaded: </td><td id="bytesUploaded"></td></tr>
+    <tr>
+        <td>Upload Progress: </td>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        <div style="width:200px; height:10px; border: solid 1px black; font-size:0px">
+                            <div id="uploadProgressBar" style=" background-color: gray; height:100%; width:0%"></div>
+                        </div>
+                    </td>
+                    <td id="percentUploaded"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</div>
+
+<!-- Latest jQuery form server -->
+<script src="https://code.jquery.com/jquery.min.js"></script>
+
+
+<!-- Bootstrap JS form CDN -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/main.js"></script>
+<script type="text/javascript" src="js/bxslider.min.js"></script>
+<script type="text/javascript" src="js/script.slider.js"></script>
+<script src="js/download-load.js" ></script>
+</body>
+</html>

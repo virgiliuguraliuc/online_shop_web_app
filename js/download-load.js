@@ -1,105 +1,132 @@
-'use strict';
+//
+// $(document).ready(function() {
+//
+//     $("#submitButton").click(function(event) {
+//
+//         // Stop default form Submit.
+//         event.preventDefault();
+//
+//         // Call Ajax Submit.
+//
+//         ajaxSubmitForm();
+//
+//     });
+//
+// });
+//
+// function ajaxSubmitForm() {
+//
+//     // Get form
+//     var form = $('#fileUploadForm')[0];
+//
+//     var data = new FormData(form);
+//
+//
+//     $("#submitButton").prop("disabled", true);
+//
+//     $.ajax({
+//         type: "POST",
+//         enctype: 'multipart/form-data',
+//         url: "/rest/uploadMultiFiles",
+//         data: data,
+//
+//         // prevent jQuery from automatically transforming the data into a query string
+//         processData: false,
+//         contentType: false,
+//         cache: false,
+//         timeout: 1000000,
+//         success: function(data, textStatus, jqXHR) {
+//
+//             $("#result").html(data);
+//             console.log("SUCCESS : ", data);
+//             $("#submitButton").prop("disabled", false);
+//             $('#fileUploadForm')[0].reset();
+//         },
+//         error: function(jqXHR, textStatus, errorThrown) {
+//
+//             $("#result").html(jqXHR.responseText);
+//             console.log("ERROR : ", jqXHR.responseText);
+//             $("#submitButton").prop("disabled", false);
+//
+//         }
+//     });
+//
+// }
 
-var singleUploadForm = document.querySelector('#singleUploadForm');
-var singleFileUploadInput = document.querySelector('#singleFileUploadInput');
-var singleFileUploadError = document.querySelector('#singleFileUploadError');
-var singleFileUploadSuccess = document.querySelector('#singleFileUploadSuccess');
+var file;
+function prepareUpload()
+{
+    document.getElementById('fileSize').innerHTML = '';
+    document.getElementById('bytesUploaded').innerHTML = '';
+    document.getElementById('percentUploaded').innerHTML = '';
+    document.getElementById('uploadProgressBar').style.width = '0%';
 
-var multipleUploadForm = document.querySelector('#multipleUploadForm');
-var multipleFileUploadInput = document.querySelector('#multipleFileUploadInput');
-var multipleFileUploadError = document.querySelector('#multipleFileUploadError');
-var multipleFileUploadSuccess = document.querySelector('#multipleFileUploadSuccess');
+    // get file name
+    file = document.getElementById('file').value;
+    if(file.lastIndexOf('\\')>=0)
+        file = file.substr(file.lastIndexOf('\\')+1);
+    document.getElementById('fileName').innerHTML = file;
 
-function uploadSingleFile(file) {
-    var formData = new FormData();
-    formData.append("file", file);
+    // get folder path
+    var curFolder = window.location.href;
+    if(curFolder[curFolder.length-1]!='/')
+        curFolder = curFolder.substring(0, curFolder.lastIndexOf('/')+1);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/uploadFile");
-
-    xhr.onload = function() {
-        console.log(xhr.responseText);
-        var response = JSON.parse(xhr.responseText);
-        if(xhr.status == 200) {
-            singleFileUploadError.style.display = "none";
-            singleFileUploadSuccess.innerHTML = "<p>File Uploaded Successfully.</p><p>DownloadUrl : <a href='" + response.fileDownloadUri + "' target='_blank'>" + response.fileDownloadUri + "</a></p>";
-            singleFileUploadSuccess.style.display = "block";
-        } else {
-            singleFileUploadSuccess.style.display = "none";
-            singleFileUploadError.innerHTML = (response && response.message) || "Some Error Occurred";
-        }
-    }
-
-    xhr.send(formData);
+    document.getElementById('target').innerHTML = curFolder;
+    document.getElementById('frm').action = curFolder;
 }
 
-function uploadMultipleFiles(files) {
-    var formData = new FormData();
-    for(var index = 0; index < files.length; index++) {
-        formData.append("files", files[index]);
-    }
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/uploadMultipleFiles");
-
-    xhr.onload = function() {
-        console.log(xhr.responseText);
-        var response = JSON.parse(xhr.responseText);
-        if(xhr.status == 200) {
-            multipleFileUploadError.style.display = "none";
-            var content = "<p>All Files Uploaded Successfully</p>";
-            for(var i = 0; i < response.length; i++) {
-                content += "<p>DownloadUrl : <a href='" + response[i].fileDownloadUri + "' target='_blank'>" + response[i].fileDownloadUri + "</a></p>";
-            }
-            multipleFileUploadSuccess.innerHTML = content;
-            multipleFileUploadSuccess.style.display = "block";
-        } else {
-            multipleFileUploadSuccess.style.display = "none";
-            multipleFileUploadError.innerHTML = (response && response.message) || "Some Error Occurred";
-        }
-    }
-
-    xhr.send(formData);
+var timerId;
+function formSubmit()
+{
+    timerId = setInterval('updateProgress()', 1000);
+    document.getElementById('cancelUploadBtn').disabled = false;
 }
 
+function updateProgress()
+{
+    var request = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
+    var uploadTarget = document.getElementById("frm").action + file;
 
-singleUploadForm.addEventListener('submit', function(event){
-    var files = singleFileUploadInput.files;
-    if(files.length === 0) {
-        singleFileUploadError.innerHTML = "Please select a file";
-        singleFileUploadError.style.display = "block";
+    request.open("REPORT", uploadTarget, false);
+    request.send("<upload-progress xmlns='ithit'/>");
+    var resp = request.responseText;
+
+    // Extract number of bytes uploaded and total content length of the file.
+    // Usually you will use XML DOM or regular expressions for this purposes
+    // but here for the sake of simplicity we will just extract using string methods.
+    var size;
+    var sizeIndex = resp.indexOf("total-content-length");
+    if(sizeIndex != -1)
+    {
+        size = resp.substring(resp.indexOf(">", sizeIndex)+1, resp.indexOf("</", sizeIndex));
+        document.getElementById("fileSize").innerHTML = size;
     }
-    uploadSingleFile(files[0]);
-    event.preventDefault();
-}, true);
-
-
-multipleUploadForm.addEventListener('submit', function(event){
-    var files = multipleFileUploadInput.files;
-    if(files.length === 0) {
-        multipleFileUploadError.innerHTML = "Please select at least one file";
-        multipleFileUploadError.style.display = "block";
-    }
-    uploadMultipleFiles(files);
-    event.preventDefault();
-}, true);
-
-
-function updateSize() {
-    var nBytes = 0,
-        oFiles = document.getElementById("fileInput").files,
-        nFiles = oFiles.length;
-    for (var nFileId = 0; nFileId < nFiles; nFileId++) {
-        nBytes += oFiles[nFileId].size;
+    var bytes = "Finished";
+    var percent = 100;
+    var bytesIndex = resp.indexOf("bytes-uploaded");
+    if(bytesIndex != -1)
+    {
+        bytes = resp.substring(resp.indexOf(">", bytesIndex)+1, resp.indexOf("</", bytesIndex));
+        if(parseInt(size)!=0)
+            percent = 100*parseInt(bytes)/parseInt(size);
     }
 
-    var sOutput = nBytes + " bytes";
-    // optional code for multiples approximation
-    for (var aMultiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"], nMultiple = 0, nApprox = nBytes / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
-        sOutput = nApprox.toFixed(3) + " " + aMultiples[nMultiple] + " (" + nBytes + " bytes)";
-    }
-    // end of optional code
+    document.getElementById("bytesUploaded").innerHTML = bytes;
+    document.getElementById("percentUploaded").innerHTML = percent.toString().substr(0, 4) + " %";
+    document.getElementById("uploadProgressBar").style.width = percent.toString() + "%";
 
-    document.getElementById("fileNum").innerHTML = nFiles;
-    document.getElementById("fileSize").innerHTML = sOutput;
+    if(percent==100)
+    {
+        clearInterval(timerId);
+        document.getElementById("cancelUploadBtn").disabled = false;
+    }
+}
+
+function cancelUpload()
+{
+    // recreate iframe to cancel upload
+    document.getElementById("uploadFrameHolder").innerHTML = "<iframe name='uploadFrame' ></iframe>";
+    clearInterval(timerId);
+    document.getElementById("cancelUploadBtn").disabled = true;
 }
