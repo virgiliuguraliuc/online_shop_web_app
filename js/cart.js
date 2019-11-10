@@ -22,7 +22,7 @@ window.Cart = {
     getProductHtml:function (product) {
         return `<tr class="cart_item">
                          <td class="product-remove">
-                             <a title="Remove this item" class="remove" href="#">×</a> 
+                             <a title="Remove this item" class="remove" href="#">×</a>
                          </td>
 
                          <td class="product-thumbnail">
@@ -30,11 +30,11 @@ window.Cart = {
                          </td>
 
                          <td class="product-name">
-                             <a href="single-product.html">${product.name}</a> 
+                             <a href="single-product.html">${product.name}</a>
                          </td>
 
                          <td class="product-price">
-                             <span class="amount">£${product.price}</span> 
+                             <span class="amount">£${product.price}</span>
                          </td>
 
                          <td class="product-quantity">
@@ -46,7 +46,7 @@ window.Cart = {
                          </td>
 
                          <td class="product-subtotal">
-                             <span class="amount">£${product.price}</span> 
+                             <span class="amount">£${product.price}</span>
                          </td>
                     </tr>`
     },
