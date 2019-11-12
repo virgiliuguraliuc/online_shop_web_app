@@ -38,9 +38,9 @@
                 <div class="col-md-8">
                     <div class="user-menu">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
-                            <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
-                            <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
+
+                      <li><a href="admin.html"><i class="fa fa-user"></i> My Account</a></li>
+
                             <li><a href="yourdownloads.html"><i class="fa fa-user"></i> Your Downloads</a></li>
                             <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
                         </ul>
@@ -70,8 +70,6 @@
                         <li class="active"><a href="book_reviews.html">Book Reviews</a></li>
                         <li><a href="cart.html">Cart</a></li>
                         <li><a href="yourdownloads.html">Your Downloads</a></li>
-                        <li><a href="#">Category</a></li>
-                        <li><a href="#">Others</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>  
@@ -100,41 +98,21 @@
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Search Books and Authors</h2>
                         <form action="">
-                            <input type="text" placeholder="Search products...">
-                            <input type="submit" value="Search">
+                            <input type="text" id="searchInput" placeholder="Search products...">
+                            <input type="submit" id="mySearch"  value="Search">
+
+<!--                            <script>-->
+<!--                                // On mouse-over, execute myFunction-->
+<!--                                function myFunction() {-->
+<!--                                    document.getElementById("mySearc").click(); // Click on the checkbox-->
+<!--                                }-->
+<!--                            </script>-->
                         </form>
                     </div>
                     
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Products</h2>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$100.00</del>
-                            </div>                             
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$100.00</del>
-                            </div>                             
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$100.00</del>
-                            </div>                             
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$100.00</del>
-                            </div>                             
-                        </div>
+
                     </div>
                     
 
@@ -142,12 +120,7 @@
                 
                 <div class="col-md-8">
                     <div class="product-content-right">
-                        <div class="product-breadcroumb">
-                            <a href="">Home</a>
-                            <a href="">Category Name</a>
-                            <a href="">Sony Smart TV - 2015</a>
-                        </div>
-                        
+
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="product-images">
@@ -155,35 +128,21 @@
                                         <img src="img/product-2.jpg" alt="">
                                     </div>
                                     
-                                    <div class="product-gallery">
-                                        <img src="img/product-thumb-1.jpg" alt="">
-                                        <img src="img/product-thumb-2.jpg" alt="">
-                                        <img src="img/product-thumb-3.jpg" alt="">
-                                    </div>
+
                                 </div>
                             </div>
                             
                             <div class="col-sm-6">
                                 <div class="product-inner">
-                                    <h2 class="product-name">Sony Smart TV - 2015</h2>
-                                    <div class="product-inner-price">
-                                        <ins>$700.00</ins> <del>$100.00</del>
-                                    </div>    
-                                    
-                                    <form action="" class="cart">
-                                        <div class="quantity">
-                                            <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-                                        </div>
-                                        <button class="add_to_cart_button" type="submit">Add to cart</button>
-                                    </form>   
-                                    
+                                    <h2 class="product-name">Book Description</h2>
+
                                     <div class="product-inner-category">
                                         <p>Category: <a href="">Summer</a>. Tags: <a href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>, <a href="">shoes</a>. </p>
                                     </div> 
                                     
                                     <div role="tabpanel">
                                         <ul class="product-tab" role="tablist">
-                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
+                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" id="Book_des">Description</a></li>
                                             <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>
                                         </ul>
                                         <div class="tab-content">
@@ -319,5 +278,6 @@
     
     <!-- Main Script -->
     <script src="js/main.js"></script>
+    <script src="js/bookReview.js"></script>
   </body>
 </html>

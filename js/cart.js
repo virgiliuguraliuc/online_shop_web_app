@@ -1,58 +1,58 @@
 window.Cart = {
     API_BASE_URL: "http://localhost:8085",
 
-    getProducts:function () {
+    getProducts: function () {
         $.ajax({
-            url: Cart.API_BASE_URL + "/carts/" + 1,
+            url: Cart.API_BASE_URL + "/carts/" + 63,
             method: "GET"
 
         }).done(function (response) {
             console.log(response);
-            Cart.displayProducts(response.products);
+            Cart.displayProducts(response.books);
         })
     },
 
 
-    displayProducts:function (products) {
+    displayProducts: function (books) {
         var allProductsHtml = "";
-        products.forEach(product => allProductsHtml += Cart.getProductHtml(product));
+        books.forEach(book => allProductsHtml += Cart.getProductHtml(book));
         $(".shop_table.cart tbody").html(allProductsHtml);
     },
 
-    getProductHtml:function (product) {
+    getProductHtml: function (book) {
         return `<tr class="cart_item">
-                         <td class="product-remove">
-                             <a title="Remove this item" class="remove" href="#">×</a>
-                         </td>
+                                            <td class="product-remove">
+                                                <a title="Remove this item" class="remove" href="#">×</a>
+                                            </td>
 
-                         <td class="product-thumbnail">
-                             <a href="single-product.html"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="img/product-thumb-2.jpg"></a>
-                         </td>
+                                            <td class="product-thumbnail">
+                                                <a href="book_reviews.html"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="img/${book.imagePath}"></a>
+                                            </td>
 
-                         <td class="product-name">
-                             <a href="single-product.html">${product.name}</a>
-                         </td>
+                                            <td class="product-name">
+                                                <a href="book_reviews.html">${book.title}</a>
+                                            </td>
 
-                         <td class="product-price">
-                             <span class="amount">£${product.price}</span>
-                         </td>
+                                            <td class="product-price">
+                                                <span class="amount">${book.price}</span> 
+                                            </td>
 
-                         <td class="product-quantity">
-                             <div class="quantity buttons_added">
-                                 <input type="button" class="minus" value="-">
-                                 <input type="number" size="4" class="input-text qty text" title="Qty" value="1" min="0" step="1">
-                                 <input type="button" class="plus" value="+">
-                             </div>
-                         </td>
 
-                         <td class="product-subtotal">
-                             <span class="amount">£${product.price}</span>
-                         </td>
-                    </tr>`
+                                            <td class="product-subtotal">
+                                                <span class="amount">${book.price}</span> 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="actions" colspan="6">
+                                        
+                                                <button type="button" onclick="location.href='yourdownloads.html'" > Buy and go to download </button>
+                                                </a>
+                                            </td>
+                                        </tr>`
     },
 
 
 };
-
-
 Cart.getProducts();
+Cart.displayProducts();
+Cart.addFinal();

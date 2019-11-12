@@ -75,7 +75,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.html">LatestBooks</a></li>
+                    <li class="active"><a href="index.html">LatestBooks</a></li>
                     <li><a href="book-library.html">Book Library</a></li>
                     <li><a href="book_reviews.html">Book Reviews</a></li>
                     <li><a href="cart.html">Cart</a></li>
@@ -90,20 +90,8 @@
 </div> <!-- End mainmenu area -->
 
 
-<div class="single-product-area">
-    <div class="zigzag-bottom"></div>
-    <div class="container">
-    <div class="form_upload1" >
-        <h2>Book file insert </h2>
-        <form class="files" method="post" action="http://localhost:8085/uploadFile" enctype="multipart/form-data">
-            <input type="file" name="file" id="file">
-            <input type="submit">
-        </form>
-    </div>
-
-
     <div class="forms" >
-        <h2> Book data form </h2>
+        <h2> EditBook </h2>
         </form action="#" method="post" name="form_name" id="form_id" class="form_class" >
             <div class="form-field ">
             <input class="moveme" type="text" id="title" placeholder="title" >
@@ -164,6 +152,6 @@
 
 <!-- Main Script -->
 
-<script src="js/uploadBooks.js"></script>
+<script src="js/modifyBooks.js"></script>
 </body>
 </html>
